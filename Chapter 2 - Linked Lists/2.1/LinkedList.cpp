@@ -1,11 +1,7 @@
-//
-// Created by HP 735 G5 on 04-Mar-24.
-//
 
-#include "LinkedList.hpp"
-#include <cstdio>
 #include <iostream>
 
+#include "LinkedList.hpp"
 
 void LinkedList::insert(int value)
 {
@@ -32,4 +28,57 @@ void LinkedList::print()
     }
     std::cout << iterator->data;
     std::cout << "\n";
+}
+
+void LinkedList::remove_duplicates()
+{
+    if(this->head == nullptr || this->head->next == nullptr) return;
+    std::unordered_set<int> seen;
+    Node* iterator = this->head;
+    Node* previous = this->head;
+
+    while(iterator != nullptr)
+    {
+        if(seen.find(iterator->data) != seen.end())
+        {
+            previous->next = iterator->next;
+            delete iterator;
+            iterator = previous->next;
+        }
+        else
+        {
+            seen.insert(iterator->data);
+            previous = iterator;
+            iterator = iterator->next;
+        }
+
+    }
+}
+
+void LinkedList::remove_duplicates_no_structure()
+{
+    if(this->head == nullptr || this->head->next == nullptr) return;
+    Node* slow = this->head;
+    Node* fast;
+
+    while(slow != nullptr)
+    {
+        fast = slow;
+        while(fast->next != nullptr)
+        {
+            if(slow->data == fast->next->data)
+            {
+                Node* temporary = fast->next;
+                fast->next = fast->next->next;
+                delete temporary;
+            }
+            else
+            {
+                fast = fast->next;
+            }
+
+        }
+        slow = slow->next;
+    }
+
 }

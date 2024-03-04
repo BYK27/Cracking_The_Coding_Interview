@@ -1,11 +1,8 @@
-//
-// Created by HP 735 G5 on 04-Mar-24.
-//
-
 #ifndef INC_2_1_LINKEDLIST_HPP
 #define INC_2_1_LINKEDLIST_HPP
 
 #include "Node.hpp"
+#include <unordered_set>
 
 class LinkedList
 {
@@ -17,6 +14,9 @@ public:
     void insert(int value);
     void print();
 
+    //Problem specific methods
+    void remove_duplicates();
+    void remove_duplicates_no_structure();
 };
 
 
