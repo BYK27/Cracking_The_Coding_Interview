@@ -3,6 +3,7 @@
 
 #include "Node.hpp"
 #include <unordered_set>
+#include <stack>
 
 class LinkedList
 {
@@ -17,8 +18,8 @@ public:
     inline Node* get_head() { return this->head; }
 
     //Problem specific methods
-    void partition(int delimiter);
-    void link(Node* start, Node* end, Node* iter);
+    bool is_palindrome();
+    static Node* reverse_list(Node* start);
 };
 
 

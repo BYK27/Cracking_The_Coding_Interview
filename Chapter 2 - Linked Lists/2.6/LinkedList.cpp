@@ -30,28 +30,6 @@ void LinkedList::print()
     std::cout << "\n";
 }
 
-void LinkedList::partition(int delimiter)
-{
-    auto* small_list = new LinkedList();
-    auto* large_list = new LinkedList();
-
-    Node* iterator = this->head;
-
-    while(iterator != nullptr)
-    {
-        if(iterator->data < delimiter) small_list->insert(iterator->data);
-        else large_list->insert(iterator->data);
-        iterator = iterator->next;
-    }
-
-    if(small_list->head)
-    {
-        small_list->tail->next = large_list->head;
-        this->head = small_list->head;
-    }
-    else if(large_list->head) this->head = large_list->head;
-
-}
 
 LinkedList::~LinkedList()
 {
@@ -66,17 +44,45 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::link(Node *start, Node *end, Node *iter)
+bool LinkedList::is_palindrome()
 {
-    if(start == nullptr)
+    Node* slow = this->head;
+    Node* fast = this->head;
+
+
+    while(fast->next != nullptr && fast->next->next != nullptr) { slow = slow->next; fast = fast->next->next; }
+
+    Node* second_list = LinkedList::reverse_list(slow->next);
+    Node* first_list = this->head;
+
+    while(second_list != nullptr)
     {
-        start = iter;
-        end = start;
+        if(first_list->data != second_list->data) return false;
+
+        first_list = first_list->next;
+        second_list = second_list->next;
     }
-    else
-    {
-        end->next = iter;
-        end = iter;
-    }
+
+    return true;
 }
+
+Node* LinkedList::reverse_list(Node* start)
+{
+    Node* previous = nullptr;
+    Node* current = start;
+    Node* next = nullptr;
+
+    while(current != nullptr)
+    {
+        next = current->next;
+        current->next = previous;
+        previous = current;
+        current = next;
+    }
+
+    return previous;
+}
+
+
+
 

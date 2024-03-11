@@ -17,8 +17,7 @@ public:
     inline Node* get_head() { return this->head; }
 
     //Problem specific methods
-    void partition(int delimiter);
-    void link(Node* start, Node* end, Node* iter);
+    static LinkedList* sum(LinkedList* first_number, LinkedList* second_number);
 };
 
 
