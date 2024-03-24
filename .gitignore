@@ -2,3 +2,5 @@
 *.out
 *.idea
 *.exe
+cmake-build-debug
+CMakeLists.txt
